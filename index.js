@@ -23,3 +23,17 @@ const calculateResult = () => {
 const clearDisplay = () => {
     display.value = '';
 }
+
+// Event listeners for keyboard input
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if (!isNaN(key) || key === '.') {
+        addNumToDisplay(key);
+    } else if (['+', '-', '*', '/'].includes(key)) {
+        addOperatorToDisplay(key);
+    } else if (['Enter', '='].includes(key)) {
+        calculateResult();
+    } else if (['Escape', 'c'].includes(key)) {
+        clearDisplay();
+    }
+});
