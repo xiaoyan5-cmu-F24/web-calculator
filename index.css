@@ -46,6 +46,10 @@ button {
     border-radius: 50rem;
     font-size: 40rem;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s ease, scale 0.2s ease;
 }
 
 button:hover {
@@ -59,6 +63,10 @@ button:active {
     scale: 0.95;
 }
 
+.icon {
+    font-size: 40rem;
+}
+
 .btn-num {
     background-color: #5E5E5E;
 }
@@ -67,10 +75,10 @@ button:active {
     background-color: #9FB5E0;
 }
 
-.btn-eq {
+.btn-eq, .btn-cut {
     background-color: #9FE0AA;
 }
 
-.btn-clear {
+.btn-clear, .btn-backspace {
     background-color: #E0CB9F;
 }

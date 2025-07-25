@@ -24,6 +24,26 @@ const clearDisplay = () => {
     display.value = '';
 }
 
+const backspaceDisplay = () => {
+    const currentValue = display.value;
+    display.value = currentValue.slice(0, -1);
+};
+
+const cutDisplay = () => {
+    const currentValue = display.value;
+    navigator.clipboard.writeText(currentValue).then(() => {
+        clearDisplay();
+    }).catch(err => {
+        console.error('Failed to copy text: ', err);
+    });
+};
+
+const superscriptDisplay = () => {
+    const currentValue = display.value;
+    display.value = currentValue + "*" + currentValue;
+    calculateResult();
+};
+
 // Event listeners for keyboard input
 document.addEventListener('keydown', (event) => {
     const key = event.key;
@@ -35,5 +55,11 @@ document.addEventListener('keydown', (event) => {
         calculateResult();
     } else if (['Escape', 'c'].includes(key)) {
         clearDisplay();
+    } else if (key === 'Backspace') {
+        backspaceDisplay();
+    } else if (key === 'x') {
+        cutDisplay();
+    } else if (key === 's') {
+        superscriptDisplay();
     }
 });
