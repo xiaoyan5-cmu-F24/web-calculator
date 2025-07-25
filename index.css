@@ -3,6 +3,13 @@
     font-size: 1px;
 }
 
+/* Mobile devices media query */
+@media (max-width: 450px) {
+    :root {
+        font-size: 0.6px;
+    }
+}
+
 body{
     margin: 0;
     height: 100vh;
