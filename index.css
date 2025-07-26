@@ -57,6 +57,7 @@ button {
     justify-content: center;
     align-items: center;
     transition: opacity 0.2s ease, scale 0.2s ease;
+    touch-action: manipulation;  /* Prevents double-tap zoom on mobile devices */
 }
 
 button:hover {
