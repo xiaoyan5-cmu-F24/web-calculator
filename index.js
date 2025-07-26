@@ -2,10 +2,12 @@ const display = document.getElementById('display');
 
 const addNumToDisplay = (num) => {
     addToDisplay(num);
+    numberInputVibrate();
 };
 
 const addOperatorToDisplay = (operator) => {
     addToDisplay(operator);
+    operatorInputVibrate();
 };
 
 const addToDisplay = (val) => {
@@ -18,15 +20,7 @@ const calculateResult = () => {
     } catch (error) {
         display.value = 'Error';
     }
-};
-
-const clearDisplay = () => {
-    display.value = '';
-}
-
-const backspaceDisplay = () => {
-    const currentValue = display.value;
-    display.value = currentValue.slice(0, -1);
+    resultReloadVibrate();
 };
 
 const cutDisplay = () => {
@@ -36,12 +30,48 @@ const cutDisplay = () => {
     }).catch(err => {
         console.error('Failed to copy text: ', err);
     });
+    resultReloadVibrate();
+};
+
+const clearDisplay = () => {
+    display.value = '';
+    removeInputVibrate();
+}
+
+const backspaceDisplay = () => {
+    const currentValue = display.value;
+    display.value = currentValue.slice(0, -1);
+    removeInputVibrate();
 };
 
 const superscriptDisplay = () => {
     const currentValue = display.value;
     display.value = currentValue + "*" + currentValue;
     calculateResult();
+};
+
+const numberInputVibrate = () => {
+    vibrateFeedback(1);
+}
+
+const operatorInputVibrate = () => {
+    vibrateFeedback(2);
+}
+
+const resultReloadVibrate = () => {
+    vibrateFeedback(3);
+}
+
+const removeInputVibrate = () => {
+    vibrateFeedback(4);
+}
+
+const vibrateFeedback = (multiplier) => {
+    const unitTime = 50;
+
+    if (navigator.vibrate) {
+        navigator.vibrate(unitTime * multiplier);
+    }
 };
 
 // Event listeners for keyboard input
