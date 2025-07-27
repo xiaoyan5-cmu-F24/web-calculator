@@ -1,2 +1,5 @@
-# Ignore the build output directory
+# Exclude build artifacts
 /dist
+
+# Exclude generated docs (GitHub Pages serves from /docs, not /dist)
+/docs
