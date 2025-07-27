@@ -1,2 +1,2 @@
 # Ignore the build output directory
-./dist
+/dist
