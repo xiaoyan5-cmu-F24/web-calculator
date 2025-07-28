@@ -3,3 +3,6 @@
 
 # Exclude generated docs (GitHub Pages serves from /docs, not /dist)
 /docs
+
+# Exclude node_modules
+/node_modules

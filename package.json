@@ -1,0 +1,15 @@
+{
+  "name": "web-calculator",
+  "version": "1.0.0",
+  "description": "Simple web calculator",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": ["calculator", "web", "html", "css", "javascript"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaoyan5-cmu-F24/web-calculator"
+  },
+  "author": "Scott",
+  "license": "MIT"
+}
