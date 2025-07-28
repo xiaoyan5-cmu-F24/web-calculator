@@ -34,8 +34,8 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci --only=production || npm install --only=production
+      # - name: Install dependencies
+      #   run: npm ci --only=production || npm install --only=production
 
       - name: Build project
         run: npm run build
