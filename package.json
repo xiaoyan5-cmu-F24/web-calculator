@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Simple web calculator",
   "scripts": {
-    "build": "node build.js"
+    "compile": "tsc",
+    "build": "npm run compile && node build.js",
+    "watch": "tsc --watch --preserveWatchOutput"
   },
   "keywords": [
     "calculator",
