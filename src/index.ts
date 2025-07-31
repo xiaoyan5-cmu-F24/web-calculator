@@ -5,6 +5,9 @@ if (!displayInput) {
     throw new Error('Calculator display element not found');
 }
 
+/** Gets the current display string */
+const getDisplayValue = (): string => displayInput!.value;
+
 // -------------------- Display Utilities --------------------
 
 /** Replaces the entire display content */
@@ -14,7 +17,7 @@ const setDisplayValue = (inputValue: string): void => {
 
 /** Appends a value to the current display content */
 const appendToDisplay = (inputValue: string): void => {
-    setDisplayValue(displayInput!.value + inputValue);
+    setDisplayValue(getDisplayValue() + inputValue);
 };
 
 // -------------------- Vibration Feedback --------------------
@@ -45,7 +48,7 @@ const handleOperatorInput = (operator: string): void => {
 
 /** Squares the current value by inputting value * value */
 const squareCurrentValue = (): void => {
-    const currentValue = displayInput!.value;
+    const currentValue = getDisplayValue();
     setDisplayValue(`${currentValue}*${currentValue}`);
     vibrateOnOperatorInput();
 };
@@ -56,7 +59,7 @@ const clearDisplay = (): void => {
 };
 
 const deleteLastCharacter = (): void => {
-    setDisplayValue(displayInput!.value.slice(0, -1));
+    setDisplayValue(getDisplayValue().slice(0, -1));
     vibrateOnClearOrDelete();
 };
 
@@ -64,7 +67,7 @@ const deleteLastCharacter = (): void => {
 
 /** Cuts the current display content to clipboard */
 const cutDisplayToClipboard = (): void => {
-    const currentValue = displayInput!.value;
+    const currentValue = getDisplayValue();
     navigator.clipboard.writeText(currentValue)
         .then(clearDisplay)
         .catch(err => console.error('Clipboard write failed:', err));
@@ -75,7 +78,7 @@ const cutDisplayToClipboard = (): void => {
 /** Evaluates the current expression safely */
 const evaluateExpression = (): void => {
     try {
-        const expression = displayInput!.value;
+        const expression = getDisplayValue();
 
         // Sanitize: allow only digits, dots, and basic operators
         if (/[^0-9+\-*/.]/.test(expression)) {
