@@ -3,10 +3,12 @@ const path = require('path');
 
 // Paths
 const srcDir = path.join(__dirname, 'src');
+const cmpDir = path.join(__dirname, 'cmp');
 const distDir = path.join(__dirname, 'dist');
 const htmlFile = path.join(srcDir, 'index.html');
 const cssFile = path.join(srcDir, 'index.css');
-const jsFile = path.join(srcDir, 'index.js');
+// index.ts is compiled to index.js in the cmp directory
+const jsFile = path.join(cmpDir, 'index.js');
 const outputFile = path.join(distDir, 'index.html');
 
 const createDistDir = () => {
