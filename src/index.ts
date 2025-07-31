@@ -1,24 +1,42 @@
-// Get calculator display input element
-const displayInput = document.getElementById('display') as HTMLInputElement | null;
+class DisplayController {
+    private inputEl: HTMLInputElement;
 
-if (!displayInput) {
-    throw new Error('Calculator display element not found');
+    constructor(selector: string) {
+        const el = document.getElementById(selector) as HTMLInputElement | null;
+        if (!el) {
+            throw new Error(`Display element '#${selector}' not found.`);
+        }
+        this.inputEl = el;
+    }
+
+    /** Get current display value */
+    get value(): string {
+        return this.inputEl.value;
+    }
+
+    /** Set display value */
+    set value(newValue: string) {
+        this.inputEl.value = newValue;
+    }
+
+    /** Clear the display */
+    clear(): void {
+        this.value = '';
+    }
+
+    /** Append text to the display */
+    append(value: string): void {
+        this.value += value;
+    }
+
+    /** Delete the last character from the display */
+    deleteLast(): void {
+        this.value = this.value.slice(0, -1);
+    }
 }
 
-/** Gets the current display string */
-const getDisplayValue = (): string => displayInput!.value;
-
-// -------------------- Display Utilities --------------------
-
-/** Replaces the entire display content */
-const setDisplayValue = (inputValue: string): void => {
-    displayInput!.value = inputValue;
-};
-
-/** Appends a value to the current display content */
-const appendToDisplay = (inputValue: string): void => {
-    setDisplayValue(getDisplayValue() + inputValue);
-};
+// -------------------- Instantiate --------------------
+const display = new DisplayController('display');
 
 // -------------------- Vibration Feedback --------------------
 
@@ -37,29 +55,29 @@ const vibrateOnClearOrDelete = (): void => triggerVibration(4);
 // -------------------- Input Handlers --------------------
 
 const handleNumberInput = (num: number | '.'): void => {
-    appendToDisplay(num.toString());
+    display.append(num.toString());
     vibrateOnNumberInput();
 };
 
 const handleOperatorInput = (operator: string): void => {
-    appendToDisplay(operator);
+    display.append(operator);
     vibrateOnOperatorInput();
 };
 
 /** Squares the current value by inputting value * value */
 const squareCurrentValue = (): void => {
-    const currentValue = getDisplayValue();
-    setDisplayValue(`${currentValue}*${currentValue}`);
+    const currentValue = display.value;
+    display.value = `${currentValue}*${currentValue}`;
     vibrateOnOperatorInput();
 };
 
 const clearDisplay = (): void => {
-    setDisplayValue('');
+    display.clear();
     vibrateOnClearOrDelete();
 };
 
 const deleteLastCharacter = (): void => {
-    setDisplayValue(getDisplayValue().slice(0, -1));
+    display.deleteLast();
     vibrateOnClearOrDelete();
 };
 
@@ -67,9 +85,9 @@ const deleteLastCharacter = (): void => {
 
 /** Cuts the current display content to clipboard */
 const cutDisplayToClipboard = (): void => {
-    const currentValue = getDisplayValue();
+    const currentValue = display.value;
     navigator.clipboard.writeText(currentValue)
-        .then(clearDisplay)
+        .then(display.clear)
         .catch(err => console.error('Clipboard write failed:', err));
 };
 
@@ -78,7 +96,7 @@ const cutDisplayToClipboard = (): void => {
 /** Evaluates the current expression safely */
 const evaluateExpression = (): void => {
     try {
-        const expression = getDisplayValue();
+        const expression = display.value;
 
         // Sanitize: allow only digits, dots, and basic operators
         if (/[^0-9+\-*/.]/.test(expression)) {
@@ -87,9 +105,9 @@ const evaluateExpression = (): void => {
 
         // Safe execution (still caution-worthy)
         const result = Function(`"use strict"; return (${expression})`)() as number;
-        setDisplayValue(String(result));
+        display.value = String(result);
     } catch {
-        setDisplayValue('Error');
+        display.value = 'Error';
     }
 
     vibrateOnCalculation();
