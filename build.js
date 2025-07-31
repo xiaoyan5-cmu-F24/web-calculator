@@ -30,6 +30,35 @@ const readFileIfExists = (filePath) => {
     }
 }
 
+// Remove export statements from code
+const removeExports = (content) => {
+    // Remove export statements but keep the declarations
+    let modifiedContent = content;
+
+    // Remove 'export default' but keep the declaration
+    modifiedContent = modifiedContent.replace(/export\s+default\s+/g, '');
+
+    // Remove 'export' from variable declarations: export const/let/var
+    modifiedContent = modifiedContent.replace(/export\s+(const|let|var)\s+/g, '$1 ');
+
+    // Remove 'export' from function declarations: export function
+    modifiedContent = modifiedContent.replace(/export\s+function\s+/g, 'function ');
+
+    // Remove 'export' from class declarations: export class
+    modifiedContent = modifiedContent.replace(/export\s+class\s+/g, 'class ');
+
+    // Remove named exports like: export { something }
+    modifiedContent = modifiedContent.replace(/export\s*\{[^}]+\}\s*;?/g, '');
+
+    // Remove export expressions like: export { something as default }
+    modifiedContent = modifiedContent.replace(/export\s*\{[^}]+\}\s*from\s*['"][^'"]+['"]\s*;?/g, '');
+
+    // Remove re-exports like: export * from './module'
+    modifiedContent = modifiedContent.replace(/export\s*\*\s*(as\s+\w+\s+)?from\s*['"][^'"]+['"]\s*;?/g, '');
+
+    return modifiedContent;
+}
+
 // Bundle JavaScript with import resolution
 const bundleJavaScript = (entryFile, processedFiles = new Set()) => {
     // Avoid circular dependencies
@@ -127,13 +156,13 @@ const bundleJavaScript = (entryFile, processedFiles = new Set()) => {
             if (importInfo.type === 'named') {
                 // For named imports, we'll just include the content
                 // In a real bundler, we'd need to parse exports
-                bundledContent += importedContent + '\n';
+                bundledContent += removeExports(importedContent) + '\n';
             } else if (importInfo.type === 'default' || importInfo.type === 'namespace') {
                 // For default/namespace imports, wrap in IIFE
-                bundledContent += importedContent + '\n';
+                bundledContent += removeExports(importedContent) + '\n';
             } else {
                 // Side-effect imports
-                bundledContent += importedContent + '\n';
+                bundledContent += removeExports(importedContent) + '\n';
             }
         }
 
@@ -143,7 +172,7 @@ const bundleJavaScript = (entryFile, processedFiles = new Set()) => {
 
     // Add the main content after all imports
     bundledContent += '\n// Main content from: ' + path.basename(entryFile) + '\n';
-    bundledContent += content;
+    bundledContent += removeExports(content);
 
     return bundledContent;
 }
