@@ -29,13 +29,6 @@ const handleOperatorInput = (operator: string): void => {
     vibrateOnOperatorInput();
 };
 
-/** Squares the current value by inputting value * value */
-const squareCurrentValue = (): void => {
-    const currentValue = display.value;
-    display.value = `${currentValue}*${currentValue}`;
-    vibrateOnOperatorInput();
-};
-
 const clearDisplay = (): void => {
     display.clear();
     vibrateOnClearOrDelete();
@@ -64,12 +57,15 @@ const evaluateExpression = (): void => {
         const expression = display.value;
 
         // Sanitize: allow only digits, dots, and basic operators
-        if (/[^0-9+\-*/.]/.test(expression)) {
+        if (/[^0-9+\-*/.^]/.test(expression)) {
             throw new Error('Unsupported characters in expression');
         }
 
+        // Replace '^' with '**' for exponentiation
+        const sanitizedExpression = expression.replace(/\^/g, '**');
+
         // Safe execution (still caution-worthy)
-        const result = Function(`"use strict"; return (${expression})`)() as number;
+        const result = Function(`"use strict"; return (${sanitizedExpression})`)() as number;
         display.value = String(result);
     } catch {
         display.value = 'Error';
@@ -85,7 +81,7 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
 
     if (!isNaN(Number(key)) || key === '.') {
         handleNumberInput(key as number | '.');
-    } else if (['+', '-', '*', '/'].includes(key)) {
+    } else if (['+', '-', '*', '/', '^'].includes(key)) {
         handleOperatorInput(key);
     } else if (key === 'Enter' || key === '=') {
         evaluateExpression();
@@ -95,7 +91,5 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
         deleteLastCharacter();
     } else if (key.toLowerCase() === 'x') {
         cutDisplayToClipboard();
-    } else if (key.toLowerCase() === 's') {
-        squareCurrentValue();
     }
 });
