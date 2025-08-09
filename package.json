@@ -2,9 +2,10 @@
   "name": "web-calculator",
   "version": "1.0.0",
   "description": "Simple web calculator",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "compile": "tsc",
-    "build": "npm run compile && node build.js",
+    "build": "tsc && node build.js",
     "watch": "tsc --watch --preserveWatchOutput"
   },
   "keywords": [
