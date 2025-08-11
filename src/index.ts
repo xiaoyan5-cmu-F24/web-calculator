@@ -44,9 +44,10 @@ const deleteLastCharacter = (): void => {
 /** Cuts the current display content to clipboard */
 const cutDisplayToClipboard = (): void => {
     const currentValue = display.value;
-    navigator.clipboard.writeText(currentValue)
-        .then(display.clear)
-        .catch(err => console.error('Clipboard write failed:', err));
+    navigator.clipboard
+        .writeText(currentValue)
+        .then(() => display.clear())
+        .catch((err) => console.error('Clipboard write failed:', err));
 };
 
 // -------------------- Evaluation --------------------
@@ -65,6 +66,7 @@ const evaluateExpression = (): void => {
         const sanitizedExpression = expression.replace(/\^/g, '**');
 
         // Safe execution (still caution-worthy)
+        // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call
         const result = Function(`"use strict"; return (${sanitizedExpression})`)() as number;
         display.value = String(result);
     } catch {
