@@ -1,36 +1,34 @@
-import { defineConfig } from 'vite';
-import { viteSingleFile } from 'vite-plugin-singlefile';
-import { VitePWA } from 'vite-plugin-pwa';
+import { defineConfig } from 'vite'; // Main Vite config function
+import { viteSingleFile } from 'vite-plugin-singlefile'; // Plugin to bundle everything into one HTML file
+import { VitePWA } from 'vite-plugin-pwa'; // Plugin to make app work offline (PWA)
 
 export default defineConfig({
-    // You deploy to GitHub Pages under a subpath: /web-calculator/
-    base: '/web-calculator/',
-    root: 'src',
+    base: '/web-calculator/', // URL path for GitHub Pages deployment
+    root: 'src', // Source files location
     build: {
-        outDir: '../dist',
-        emptyOutDir: true,
+        outDir: '../dist', // Where to put built files
+        emptyOutDir: true, // Clean output folder before building
     },
     plugins: [
-        viteSingleFile(), // keep if you like the "one HTML file" output
+        viteSingleFile(), // Bundle everything into one HTML file
         VitePWA({
-            registerType: 'autoUpdate',
-            // Safer with single-file builds: inject the SW registration inline
-            injectRegister: 'inline',
+            registerType: 'autoUpdate', // Automatically update when new version available
+            injectRegister: 'inline', // Add service worker code directly in HTML
             manifest: {
-                name: 'Web Calculator',
-                short_name: 'Calculator',
-                description: 'A fast, offline calculator',
-                start_url: '/web-calculator/',
-                scope: '/web-calculator/',
-                display: 'standalone',
-                background_color: '#ffffff',
-                theme_color: '#111827',
-                orientation: 'portrait',
+                name: 'Web Calculator', // Full app name
+                short_name: 'Calculator', // Short name for home screen
+                description: 'A fast, offline calculator', // App description
+                start_url: '/web-calculator/', // Starting page when opened
+                scope: '/web-calculator/', // Which URLs this PWA controls
+                display: 'standalone', // Look like a native app
+                background_color: '#ffffff', // Background color while loading
+                theme_color: '#111827', // Browser theme color
+                orientation: 'portrait', // Preferred screen orientation
                 icons: [
-                    { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
-                    { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },
+                    { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' }, // Small icon
+                    { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' }, // Large icon
                     {
-                        src: 'pwa-512-maskable.png',
+                        src: 'pwa-512-maskable.png', // Icon that adapts to different shapes
                         sizes: '512x512',
                         type: 'image/png',
                         purpose: 'any maskable',
@@ -38,20 +36,20 @@ export default defineConfig({
                 ],
             },
             workbox: {
-                globPatterns: ['**/*.{html,js,css,ico,png,svg}'],
-                // Cache Google Fonts / Material Symbols for offline
+                globPatterns: ['**/*.{html,js,css,ico,png,svg}'], // Files to cache for offline use
                 runtimeCaching: [
+                    // Cache external resources
                     {
-                        urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-                        handler: 'StaleWhileRevalidate',
+                        urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i, // Google Fonts CSS
+                        handler: 'StaleWhileRevalidate', // Use cache first, update in background
                         options: { cacheName: 'google-fonts-stylesheets' },
                     },
                     {
-                        urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-                        handler: 'CacheFirst',
+                        urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i, // Google Fonts files
+                        handler: 'CacheFirst', // Use cache, only fetch if not cached
                         options: {
                             cacheName: 'google-fonts-webfonts',
-                            expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 365 },
+                            expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 365 }, // Keep for 1 year
                         },
                     },
                 ],
