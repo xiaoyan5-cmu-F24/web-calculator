@@ -19,8 +19,8 @@ const vibrateOnClearOrDelete = (): void => triggerVibration(4);
 
 // -------------------- Input Handlers --------------------
 
-const handleNumberInput = (num: number | '.'): void => {
-    display.append(num.toString());
+const handleNumberInput = (num: string): void => {
+    display.append(num);
     vibrateOnNumberInput();
 };
 
@@ -82,7 +82,7 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
     const key = event.key;
 
     if (!isNaN(Number(key)) || key === '.') {
-        handleNumberInput(key as number | '.');
+        handleNumberInput(key);
     } else if (['+', '-', '*', '/', '^'].includes(key)) {
         handleOperatorInput(key);
     } else if (key === 'Enter' || key === '=') {
@@ -94,4 +94,35 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
     } else if (key.toLowerCase() === 'x') {
         cutDisplayToClipboard();
     }
+});
+
+// -------------------- Mouse Support --------------------
+// index.ts (module)
+const buttons = document.querySelectorAll<HTMLButtonElement>('#buttons button');
+
+buttons.forEach((btn) => {
+    const text = btn.textContent?.trim() ?? '';
+
+    btn.addEventListener('click', () => {
+        switch (true) {
+            case btn.classList.contains('btn-num'):
+                handleNumberInput(text); // accept string so "." works
+                break;
+            case btn.classList.contains('btn-op'):
+                handleOperatorInput(text);
+                break;
+            case btn.classList.contains('btn-clear'):
+                clearDisplay();
+                break;
+            case btn.classList.contains('btn-backspace'):
+                deleteLastCharacter();
+                break;
+            case btn.classList.contains('btn-cut'):
+                cutDisplayToClipboard();
+                break;
+            case btn.classList.contains('btn-eq'):
+                evaluateExpression();
+                break;
+        }
+    });
 });
