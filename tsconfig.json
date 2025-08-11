@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "target": "ES2020", // Which version of JavaScript to compile to
-    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Which built-in libraries TypeScript can use
-    "module": "ESNext", // How to handle import/export statements
-    "moduleResolution": "Bundler", // How TypeScript finds and resolves imported modules
-    "strict": true, // Enable all strict type checking rules for better code safety
-    "esModuleInterop": true, // Allow importing CommonJS modules with ES6 import syntax
-    "forceConsistentCasingInFileNames": true, // Ensure file names match exactly (case-sensitive)
-    "skipLibCheck": true, // Skip type checking of library files to speed up compilation
-    "noEmit": true, // Don't generate JavaScript files (let Vite handle compilation)
-    "types": ["vite/client"] // Include Vite-specific type definitions
-  },
-  "include": ["src/**/*"], // Include all files in the src folder and its subfolders
-  "exclude": ["node_modules", "dist", "cmp", "vite.config.ts"] // Don't compile these files/folders
+    "compilerOptions": {
+        "target": "ES2020", // Which version of JavaScript to compile to
+        "lib": ["ES2020", "DOM", "DOM.Iterable"], // Which built-in libraries TypeScript can use
+        "module": "ESNext", // How to handle import/export statements
+        "moduleResolution": "Bundler", // How TypeScript finds and resolves imported modules
+        "strict": true, // Enable all strict type checking rules for better code safety
+        "esModuleInterop": true, // Allow importing CommonJS modules with ES6 import syntax
+        "forceConsistentCasingInFileNames": true, // Ensure file names match exactly (case-sensitive)
+        "skipLibCheck": true, // Skip type checking of library files to speed up compilation
+        "noEmit": true, // Don't generate JavaScript files (let Vite handle compilation)
+        "types": ["vite/client"] // Include Vite-specific type definitions
+    },
+    "include": ["src/**/*"], // Include all files in the src folder and its subfolders
+    "exclude": ["node_modules", "dist", "cmp", "vite.config.ts"] // Don't compile these files/folders
 }

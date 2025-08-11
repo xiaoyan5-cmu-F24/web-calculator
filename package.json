@@ -1,41 +1,41 @@
 {
-  "name": "web-calculator",
-  "version": "1.0.0",
-  "description": "Simple web calculator",
-  "packageManager": "pnpm@10.14.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "type-check": "tsc -p tsconfig.json",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
-  },
-  "keywords": [
-    "calculator",
-    "web",
-    "html",
-    "css",
-    "javascript"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/xiaoyan5-cmu-F24/web-calculator"
-  },
-  "author": "Scott",
-  "license": "MIT",
-  "devDependencies": {
-    "@eslint/js": "^9.33.0",
-    "eslint": "^9.33.0",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^16.3.0",
-    "prettier": "^3.6.2",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.39.0",
-    "vite": "^7.1.1",
-    "vite-plugin-singlefile": "^2.3.0"
-  }
+    "name": "web-calculator",
+    "version": "1.0.0",
+    "description": "Simple web calculator",
+    "packageManager": "pnpm@10.14.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "type-check": "tsc -p tsconfig.json",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "keywords": [
+        "calculator",
+        "web",
+        "html",
+        "css",
+        "javascript"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/xiaoyan5-cmu-F24/web-calculator"
+    },
+    "author": "Scott",
+    "license": "MIT",
+    "devDependencies": {
+        "@eslint/js": "^9.33.0",
+        "eslint": "^9.33.0",
+        "eslint-config-prettier": "^10.1.8",
+        "globals": "^16.3.0",
+        "prettier": "^3.6.2",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.39.0",
+        "vite": "^7.1.1",
+        "vite-plugin-singlefile": "^2.3.0"
+    }
 }

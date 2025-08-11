@@ -10,7 +10,7 @@
     }
 }
 
-body{
+body {
     margin: 0;
     height: 100dvh;
     display: flex;
@@ -28,7 +28,7 @@ body{
 #display {
     width: 448rem;
     height: 100rem;
-    background-color: #E0CB9F;
+    background-color: #e0cb9f;
     border: none;
     border-radius: 24rem;
     font-size: 40rem;
@@ -57,8 +57,10 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.2s ease, scale 0.2s ease;
-    touch-action: manipulation;  /* Prevents double-tap zoom on mobile devices */
+    transition:
+        opacity 0.2s ease,
+        scale 0.2s ease;
+    touch-action: manipulation; /* Prevents double-tap zoom on mobile devices */
 }
 
 button:hover {
@@ -77,17 +79,19 @@ button:active {
 }
 
 .btn-num {
-    background-color: #5E5E5E;
+    background-color: #5e5e5e;
 }
 
 .btn-op {
-    background-color: #9FB5E0;
+    background-color: #9fb5e0;
 }
 
-.btn-eq, .btn-cut {
-    background-color: #9FE0AA;
+.btn-eq,
+.btn-cut {
+    background-color: #9fe0aa;
 }
 
-.btn-clear, .btn-backspace {
-    background-color: #E0CB9F;
+.btn-clear,
+.btn-backspace {
+    background-color: #e0cb9f;
 }

@@ -1,43 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Calculator</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=backspace,content_cut" />
-    <link rel="stylesheet" href="./index.css">
-</head>
-<body>
-    <div id="calculator">
-        <input id="display" readonly>
-        <div id="buttons">
-            <button class="btn-num" onclick="handleNumberInput(9)">9</button>
-            <button class="btn-num" onclick="handleNumberInput(8)">8</button>
-            <button class="btn-num" onclick="handleNumberInput(7)">7</button>
-            <button class="btn-op" onclick="handleOperatorInput('+')">+</button>
-            <button class="btn-num" onclick="handleNumberInput(6)">6</button>
-            <button class="btn-num" onclick="handleNumberInput(5)">5</button>
-            <button class="btn-num" onclick="handleNumberInput(4)">4</button>
-            <button class="btn-op" onclick="handleOperatorInput('-')">-</button>
-            <button class="btn-num" onclick="handleNumberInput(3)">3</button>
-            <button class="btn-num" onclick="handleNumberInput(2)">2</button>
-            <button class="btn-num" onclick="handleNumberInput(1)">1</button>
-            <button class="btn-op" onclick="handleOperatorInput('*')">*</button>
-            <button class="btn-clear" onclick="clearDisplay()">C</button>
-            <button class="btn-num" onclick="handleNumberInput(0)">0</button>
-            <button class="btn-num" onclick="handleNumberInput('.')">.</button>
-            <button class="btn-op" onclick="handleOperatorInput('/')">/</button>
-            <button class="btn-backspace" onclick="deleteLastCharacter()">
-                <span class="material-symbols-outlined icon">backspace</span>
-            </button>
-            <button class="btn-cut" onclick="cutDisplayToClipboard()">
-                <span class="material-symbols-outlined icon">content_cut</span>
-            </button>
-            <button class="btn-eq" onclick="evaluateExpression()">=</button>
-            <button class="btn-op" onclick="handleOperatorInput('^')">^</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Web Calculator</title>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=backspace,content_cut"
+        />
+        <link rel="stylesheet" href="./index.css" />
+    </head>
+    <body>
+        <div id="calculator">
+            <input id="display" readonly />
+            <div id="buttons">
+                <button class="btn-num" onclick="handleNumberInput(9)">9</button>
+                <button class="btn-num" onclick="handleNumberInput(8)">8</button>
+                <button class="btn-num" onclick="handleNumberInput(7)">7</button>
+                <button class="btn-op" onclick="handleOperatorInput('+')">+</button>
+                <button class="btn-num" onclick="handleNumberInput(6)">6</button>
+                <button class="btn-num" onclick="handleNumberInput(5)">5</button>
+                <button class="btn-num" onclick="handleNumberInput(4)">4</button>
+                <button class="btn-op" onclick="handleOperatorInput('-')">-</button>
+                <button class="btn-num" onclick="handleNumberInput(3)">3</button>
+                <button class="btn-num" onclick="handleNumberInput(2)">2</button>
+                <button class="btn-num" onclick="handleNumberInput(1)">1</button>
+                <button class="btn-op" onclick="handleOperatorInput('*')">*</button>
+                <button class="btn-clear" onclick="clearDisplay()">C</button>
+                <button class="btn-num" onclick="handleNumberInput(0)">0</button>
+                <button class="btn-num" onclick="handleNumberInput('.')">.</button>
+                <button class="btn-op" onclick="handleOperatorInput('/')">/</button>
+                <button class="btn-backspace" onclick="deleteLastCharacter()">
+                    <span class="material-symbols-outlined icon">backspace</span>
+                </button>
+                <button class="btn-cut" onclick="cutDisplayToClipboard()">
+                    <span class="material-symbols-outlined icon">content_cut</span>
+                </button>
+                <button class="btn-eq" onclick="evaluateExpression()">=</button>
+                <button class="btn-op" onclick="handleOperatorInput('^')">^</button>
+            </div>
         </div>
-    </div>
 
-    <script type="module" src="./index.ts"></script>
-</body>
+        <script type="module" src="./index.ts"></script>
+    </body>
 </html>
