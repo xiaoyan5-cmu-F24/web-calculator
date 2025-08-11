@@ -22,7 +22,7 @@ export default defineConfig({
                 scope: '/web-calculator/', // Which URLs this PWA controls
                 display: 'standalone', // Look like a native app
                 background_color: '#ffffff', // Background color while loading
-                theme_color: '#111827', // Browser theme color
+                theme_color: '#ffffff', // Browser theme color
                 orientation: 'portrait', // Preferred screen orientation
                 icons: [
                     { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' }, // Small icon
