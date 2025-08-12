@@ -1,4 +1,5 @@
 import { DisplayController } from './DisplayController';
+import { evaluateMath } from './calc'; // Import the math evaluation function
 
 // -------------------- Instantiate --------------------
 const display = new DisplayController('display');
@@ -66,8 +67,7 @@ const evaluateExpression = (): void => {
         const sanitizedExpression = expression.replace(/\^/g, '**');
 
         // Safe execution (still caution-worthy)
-        // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call
-        const result = Function(`"use strict"; return (${sanitizedExpression})`)() as number;
+        const result = evaluateMath(sanitizedExpression);
         display.value = String(result);
     } catch {
         display.value = 'Error';
