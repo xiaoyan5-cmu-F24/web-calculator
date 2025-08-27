@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'; // Main Vite config function
+import { defineConfig } from 'vitest/config'; // Config function supporting both Vite and Vitest
 import { viteSingleFile } from 'vite-plugin-singlefile'; // Plugin to bundle everything into one HTML file
 import { VitePWA } from 'vite-plugin-pwa'; // Plugin to make app work offline (PWA)
 
@@ -8,6 +8,15 @@ export default defineConfig({
     build: {
         outDir: '../dist', // Where to put built files
         emptyOutDir: true, // Clean output folder before building
+    },
+    test: {
+        environment: 'jsdom', // Use browser-like environment for DOM testing
+        setupFiles: './test/setup.ts', // Run this file before each test
+        css: true, // Process CSS imports in tests
+        coverage: {
+            provider: 'v8', // Use V8 engine for coverage analysis
+            reporter: ['text', 'html'], // Show coverage in terminal and generate HTML report
+        },
     },
     plugins: [
         viteSingleFile(), // Bundle everything into one HTML file
